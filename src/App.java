@@ -17,7 +17,8 @@ public class App {
                 if(args.length != 2){
                     System.out.println("Invalid number of arguments");
                     return;
-                } else {
+                } 
+                else {
                     String directoryName = args[1];
                     ArchiveManager archiveManager = new ArchiveManager();
                     archiveManager.box(directoryName);
@@ -29,7 +30,8 @@ public class App {
                 if(args.length != 2){
                     System.out.println("Invalid number of arguments");
                     return;
-                } else {
+                }
+                else {
                     String archiveName = args[1];
                     ArchiveManager archiveManager = new ArchiveManager();
                     archiveManager.unbox(archiveName);
@@ -41,7 +43,8 @@ public class App {
                 if(args.length != 2){
                     System.out.println("Invalid number of arguments");
                     return;
-                } else {
+                }
+                else {
                     String archiveName = args[1];
                     ArchiveManager archiveManager = new ArchiveManager();
                     archiveManager.list(archiveName);
@@ -53,13 +56,14 @@ public class App {
                 if(args.length != 3){
                     System.out.println("Invalid number of arguments");
                     return;
-                } else {
+                }
+                else {
                     String fileName = args[1];
                     String archiveName = args[2];
                     ArchiveManager archiveManager = new ArchiveManager();
                     archiveManager.add(fileName, archiveName);
                 }
-                
+
             // else exit
             default:
                 System.out.println("Invalid command");
