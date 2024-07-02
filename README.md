@@ -10,13 +10,13 @@ Boxed is an archive manager that help creating and managing an archive easy.
 
 ## Usage
 
-Box can be used by running the `boxed` command in terminal. 
+Box can be used by running the `Boxed` command in terminal. 
 Following are the supported commands:
 
-- `boxed box <directory-name>`: Create a new archive.
-- `boxed add <file-path> <archive-name>`: Add a file to an existing archive.
-- `boxed unbox <archive-name>`: Extract files from an archive.
-- `boxed list <archive-name>`: List the contents of an archive.
+- `Boxed box <directory-name>`: Create a new archive.
+- `Boxed add <file-path> <archive-name>`: Add a file to an existing archive.
+- `Boxed unbox <archive-name>`: Extract files from an archive.
+- `Boxed list <archive-name>`: List the contents of an archive.
 
 ## Future Works
 - Encryption of files

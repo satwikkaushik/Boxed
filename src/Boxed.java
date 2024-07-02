@@ -1,4 +1,4 @@
-public class App {
+public class Boxed {
     public static void main(String[] args) {
 
         // check if any arguments are passed
