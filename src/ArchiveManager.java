@@ -100,6 +100,7 @@ public class ArchiveManager {
                     int len = bin.read(buffer);
                     if (len < 0) {
                         bin.close();
+                        System.out.println("Files extracted successfully");
                         return true;
                     }
 
@@ -128,6 +129,7 @@ public class ArchiveManager {
                         
                         if(len < 0){
                             bin.close();
+                            System.out.println("Files extracted successfully");
                             return true;
                         } else {
                             bout.write(excessByte);
@@ -207,7 +209,44 @@ public class ArchiveManager {
 
     // adding a new file to an existing archive
     protected boolean add(String fileName, String archiveName) {
-        return false;
+        // check if file exists
+        if (!fileManager.fileExists(fileName)) {
+            System.out.println("File does not exist");
+            return false;
+        }
+
+        // check if archive exists
+        if (!fileManager.archiveExists(archiveName)) {
+            System.out.println("Archive does not exist");
+            return false;
+        }
+
+        // writing data
+        try (BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(archiveName, true))) {
+            File file = new File(fileName);
+            // writing file header
+            String header = determineFileHeader(file);
+            bout.write(header.getBytes());
+
+            // writing file contents
+            try (BufferedInputStream bin = new BufferedInputStream(new FileInputStream(file))) {
+                byte[] buffer = new byte[BUFFER_SIZE];
+                int len;
+
+                while ((len = bin.read(buffer)) > 0) {
+                    bout.write(buffer, 0, len);
+                }
+            } catch (IOException e) {
+                System.out.println("Error while reading file contents");
+                return false;
+            }
+
+            System.out.println("File added to archive successfully");
+            return true;
+        } catch (IOException e) {
+            System.out.println("Error occured while adding file to archive");
+            return false;
+        }
     }
 
     // extracting metadata of the file

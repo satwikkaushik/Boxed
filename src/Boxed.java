@@ -62,6 +62,7 @@ public class Boxed {
                     String archiveName = args[2];
                     ArchiveManager archiveManager = new ArchiveManager();
                     archiveManager.add(fileName, archiveName);
+                    break;
                 }
 
             // else exit
