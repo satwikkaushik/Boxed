@@ -154,7 +154,55 @@ public class ArchiveManager {
 
     // listing contents of an archive
     protected boolean list(String archiveName) {
-        return false;
+        // check if archive exists
+        if (!fileManager.archiveExists(archiveName)) {
+            System.out.println("Archive does not exist");
+            return false;
+        }
+
+        ArrayList<String> list = new ArrayList<>(); 
+        // read data
+        try(BufferedInputStream bin = new BufferedInputStream(new FileInputStream(archiveName))){
+            int readLength = 0;
+
+            while(true){
+                byte[] buffer = new byte[BUFFER_SIZE];
+                int len = bin.read(buffer);
+                if (len < 0) {
+                    bin.close();
+                    break;
+                }
+
+                String[] headerContents = new String(buffer).split(",");
+                // headerContents = [filename, timestamp, size, padding]
+
+                // appending to list
+                list.add(headerContents[0]);
+        
+                readLength = Integer.parseInt(headerContents[2]);
+            
+                // skipping file contents
+                byte[] buffer2 = new byte[readLength - 1];
+                len = bin.read(buffer2);
+                if(len < 0){
+                    bin.close();
+                    break;
+                }
+                // resetting data for next file
+                readLength = 0;
+            }
+
+        } catch (IOException e){
+            System.out.println("Error while reading archive");
+            return false;
+        }
+
+        System.out.println("Contents of the archive:");
+        for(String file : list){
+            System.out.println(file);
+        }
+        
+        return true;
     }
 
     // adding a new file to an existing archive
