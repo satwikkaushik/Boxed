@@ -13,6 +13,14 @@ public class FileManager {
         return file.exists() && file.isFile();
     }
 
+    protected boolean archiveExists(String archiveName){
+        File archive = new File(archiveName);
+        if(archive.exists() && archive.isFile()){
+            return archiveName.split("\\.")[1].equals("boxed");
+        }
+        return false;
+    }
+
     protected ArrayList<File> listFiles(String directoryName){
         File directory = new File(directoryName);
         File[] files = directory.listFiles();
